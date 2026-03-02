@@ -1,4 +1,4 @@
-# Repository for Paper *Latent Adaptation of Foundation Policies for Sim-to-Real Transfer*
+# Repository for Paper: *Latent Adaptation of Foundation Policies for Sim-to-Real Transfer*
 
 This repository contains the official experimental code used to reproduce the results reported in the paper, including:
 
@@ -18,7 +18,7 @@ The provided scripts support controlled environment perturbations and evaluation
 The task configurations are located in:
 
 ```
-/home/local/ASURITE/longchao/Desktop/project/sim2realFoun/Sim2Real/Sim2RealFound_clean/hilp_zsrl/url_benchmark/custom_dmc_tasks
+hilp_zsrl/url_benchmark/custom_dmc_tasks
 ```
 
 
