@@ -1,5 +1,13 @@
 # Repository for Paper: *Latent Adaptation of Foundation Policies for Sim-to-Real Transfer*
 
+
+[![Python](https://img.shields.io/badge/Python-3.8%2B-3776AB?style=flat-square&logo=python&logoColor=white)](https://www.python.org/downloads/)
+[![JAX](https://img.shields.io/badge/JAX-0.4.3-A50026?style=flat-square&logo=google&logoColor=white)](https://github.com/google/jax)
+[![MuJoCo](https://img.shields.io/badge/MuJoCo-2.3.7-00897B?style=flat-square)](https://mujoco.org/)
+[![License](https://img.shields.io/badge/License-MIT-blue?style=flat-square)](LICENSE)
+<!-- [![ICLR](https://img.shields.io/badge/ICLR-2026-red?style=flat-square)](https://iclr.cc/) -->
+
+
 <p align="center">
   <img src="assets/mainFig.jpg" alt="Overview of the proposed Found-Adapt method" width="900"/>
 </p>
