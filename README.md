@@ -1,5 +1,15 @@
 # Repository for Paper: *Latent Adaptation of Foundation Policies for Sim-to-Real Transfer*
 
+<p align="center">
+  <img src="assets/mainFig.jpg" alt="Overview of the proposed Found-Adapt method" width="900"/>
+</p>
+
+<p align="center">
+  <em>
+  Figure 2: Overview of the proposed method. Offline trajectories from the simulator E_sim train a state encoder φ and a latent-conditioned policy π(a|s, z) using intrinsic rewards. Direct deployment degrades under dynamic gaps. We therefore perform latent adaptation with a small batch of target-domain data D_tar: (i) a weighted joint least-squares fit yields an initial latent z*_src; (ii) a Meta-Dynamic network extracts permutation-invariant distributional features η; (iii) an adapter network refines z*_src into z_final. The refined latent conditions π for robust execution in the target environment E_tar without retraining the policy.
+  </em>
+</p>
+
 This repository contains the official experimental code used to reproduce the results reported in the paper, including:
 
 * InDomain baseline evaluation
