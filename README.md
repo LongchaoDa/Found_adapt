@@ -24,7 +24,6 @@ This repository contains the official experimental code used to reproduce the re
 * Sim-to-Real adaptation experiments
 * Gravity and friction variation studies
 * Direct vs. Ours (test-time adaptation) comparison
-* Multi-seed reproducibility analysis (0, 44, 88)
 
 The provided scripts support controlled environment perturbations and evaluation under consistent replay buffer configurations, enabling full replication of the experimental tables reported in the paper.
 
