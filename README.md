@@ -27,6 +27,14 @@ This repository contains the official experimental code used to reproduce the re
 
 The provided scripts support controlled environment perturbations and evaluation under consistent replay buffer configurations, enabling full replication of the experimental tables reported in the paper.
 
+## Prerequisite Data
+
+The data required for this repository is available here:
+
+[Google Drive dataset link](https://drive.google.com/file/d/1DAlkur3OR8ODxfxKoZy3TXCmk451d2AR/view?usp=sharing)
+
+Please download this data before running the experiments below.
+
 
 ## 0. The sim-to-real task configurations
 
@@ -239,4 +247,3 @@ year={2026},
 url={https://openreview.net/forum?id=yn9dzttHvT}
 }
 ```
-
