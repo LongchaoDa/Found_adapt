@@ -1,7 +1,7 @@
 # Repository for Paper: *Latent Adaptation of Foundation Policies for Sim-to-Real Transfer*
 
 
-[![Python](https://img.shields.io/badge/Python-3.8%2B-3776AB?style=flat-square&logo=python&logoColor=white)](https://www.python.org/downloads/)
+[![Python](https://img.shields.io/badge/Python-3.8.19-3776AB?style=flat-square&logo=python&logoColor=white)](https://www.python.org/downloads/)
 [![JAX](https://img.shields.io/badge/JAX-0.4.3-A50026?style=flat-square&logo=google&logoColor=white)](https://github.com/google/jax)
 [![MuJoCo](https://img.shields.io/badge/MuJoCo-2.3.7-00897B?style=flat-square)](https://mujoco.org/)
 [![License](https://img.shields.io/badge/License-MIT-blue?style=flat-square)](LICENSE)
@@ -27,6 +27,34 @@ This repository contains the official experimental code used to reproduce the re
 
 The provided scripts support controlled environment perturbations and evaluation under consistent replay buffer configurations, enabling full replication of the experimental tables reported in the paper.
 
+## Environment Setup
+
+This codebase is tested with **Python 3.8.19**.
+
+We recommend creating a fresh Conda environment and then installing the Python packages with `pip`:
+
+```bash
+conda create -n hilp_zsrl python=3.8.19 -y
+conda activate hilp_zsrl
+python -m pip install --upgrade pip
+python -m pip install -r requirements.txt
+```
+
+If you prefer, you can also recreate the environment from `environment.yml`:
+
+```bash
+conda env create -f environment.yml
+conda activate hilp_zsrl
+```
+
+## Prerequisite Data
+
+The data required for this repository is available here:
+
+[Google Drive dataset link](https://drive.google.com/file/d/1DAlkur3OR8ODxfxKoZy3TXCmk451d2AR/view?usp=sharing)
+
+Please download this data before running the experiments below.
+
 
 ## 0. The sim-to-real task configurations
 
@@ -50,7 +78,7 @@ python hilp_zsrl/url_benchmark/test_multi_surface_offline_bothfrictionandGarvity
 
 Notes:
 * Do **not** run this from `data/`. The script expects paths relative to the repo root.
-* The dataset path defaults to `data/datacollection_mini` under the repo root.
+* The dataset path defaults to `data/datacollection_mini` under the repo root. If that directory is not present, the code falls back to `data/datacollection`.
   To override, set `SIM2REAL_DATA_ROOT`:
 
 ```bash
