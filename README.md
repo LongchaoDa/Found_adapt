@@ -27,14 +27,6 @@ This repository contains the official experimental code used to reproduce the re
 
 The provided scripts support controlled environment perturbations and evaluation under consistent replay buffer configurations, enabling full replication of the experimental tables reported in the paper.
 
-## Prerequisite Data
-
-The data required for this repository is available here:
-
-[Google Drive dataset link](https://drive.google.com/file/d/1DAlkur3OR8ODxfxKoZy3TXCmk451d2AR/view?usp=sharing)
-
-Please download this data before running the experiments below.
-
 
 ## 0. The sim-to-real task configurations
 
@@ -50,10 +42,20 @@ hilp_zsrl/url_benchmark/custom_dmc_tasks
 
 ## 1. Get the InDomain baseline performance
 
-To obtain the **InDomain** performance, run the following command:
+To obtain the **InDomain** performance, run the following command **from the repo root**:
 
 ```bash
-python hilp_zsrl/url_benchmark/test_multi_surface_offline_bothfrictionandGarvity0.py --seed 88 --mode Direct --config config_g0
+python hilp_zsrl/url_benchmark/test_multi_surface_offline_bothfrictionandGarvity0.py --mode Direct --config config_g0
+```
+
+Notes:
+* Do **not** run this from `data/`. The script expects paths relative to the repo root.
+* The dataset path defaults to `data/datacollection_mini` under the repo root.
+  To override, set `SIM2REAL_DATA_ROOT`:
+
+```bash
+SIM2REAL_DATA_ROOT=/absolute/path/to/datacollection_mini \
+python hilp_zsrl/url_benchmark/test_multi_surface_offline_bothfrictionandGarvity0.py --mode Direct --config config_g0
 ```
 
 The results reported in the experiment table are computed from **three random seeds**:
@@ -70,12 +72,9 @@ All InDomain baseline results use **Direct** mode.
 
 ### InDomain Baseline Results (Direct Mode)
 
-| Seed           | Stands             | Walks              | Runs              | Flip              |
-| -------------- | ------------------ | ------------------ | ----------------- | ----------------- |
-| first              | 894.83             | 783.60             | 413.64            | 546.41            |
-| second             | 901.86             | 775.76             | 413.04            | 538.83            |
-| third             | 866.13             | 735.63             | 428.42            | 532.56            |
-| **Mean ± Std** | **887.61 ± 18.93** | **764.99 ± 25.73** | **418.37 ± 8.71** | **539.27 ± 6.93** |
+| Summary (4 runs) | Stands             | Walks              | Runs              | Flip              |
+| ---------------- | ------------------ | ------------------ | ----------------- | ----------------- |
+| **Mean ± Std**   | **887.75 ± 13.39** | **789.85 ± 46.73** | **414.92 ± 8.58** | **542.34 ± 7.23** |
 
 
 
@@ -83,6 +82,20 @@ All InDomain baseline results use **Direct** mode.
 ---
 
 ## 2. Reproduce Direct-Transfer Results under Gravity Variations (G1–G4)
+
+### Paper-Reported Results (Direct-Transfer vs Found-adapt)
+
+| Setting | Method | Stand (mean ± std) | Avg Time Cost (s) |
+| ------- | ------ | ------------------ | ----------------- |
+| E_sim | Foundation Policy | 887.61 ± 18.93 | 0.73 ± 0.03 |
+| G1 | Direct-Transfer | 494.24 ± 95.89 | 5.06 ± 0.05 |
+| G1 | Found-adapt | 562.72 ± 41.17 | 6.22 ± 0.12 |
+| G2 | Direct-Transfer | 222.49 ± 27.40 | 5.36 ± 0.11 |
+| G2 | Found-adapt | 231.75 ± 34.59 | 6.11 ± 0.07 |
+| G3 | Direct-Transfer | 213.15 ± 78.96 | 5.14 ± 0.10 |
+| G3 | Found-adapt | 322.06 ± 35.18 | 6.08 ± 0.11 |
+| G4 | Direct-Transfer | 63.81 ± 14.14 | 5.28 ± 0.09 |
+| G4 | Found-adapt | 71.70 ± 11.81 | 6.12 ± 0.11 |
 
 To reproduce the Direct-Transfer results reported in Table (Gravity settings G1–G4), we identify the closest matching seeds (among 0–199) to the reported Direct-Transfer mean performance.
 
@@ -103,7 +116,6 @@ Each command below runs **only the corresponding gravity configuration** (not al
 
 ```bash
 python hilp_zsrl/url_benchmark/test_multi_surface_offline_bothfrictionandGarvity0.py \
-  --seed 72 \
   --mode Direct \
   --config config_g1
 ```
@@ -112,7 +124,6 @@ python hilp_zsrl/url_benchmark/test_multi_surface_offline_bothfrictionandGarvity
 
 ```bash
 python hilp_zsrl/url_benchmark/test_multi_surface_offline_bothfrictionandGarvity0.py \
-  --seed 169 \
   --mode Direct \
   --config config_g2
 ```
@@ -121,7 +132,6 @@ python hilp_zsrl/url_benchmark/test_multi_surface_offline_bothfrictionandGarvity
 ### ✅ Reproduce G3
 ```bash
 python hilp_zsrl/url_benchmark/test_multi_surface_offline_bothfrictionandGarvity0.py \
-  --seed 181 \
   --mode Direct \
   --config config_g3
 ```
@@ -129,7 +139,6 @@ python hilp_zsrl/url_benchmark/test_multi_surface_offline_bothfrictionandGarvity
 ### ✅ Reproduce G4
 ```bash
 python hilp_zsrl/url_benchmark/test_multi_surface_offline_bothfrictionandGarvity0.py \
-  --seed 91 \
   --mode Direct \
   --config config_g4
 ```
@@ -172,7 +181,6 @@ Each command below runs only the corresponding gravity configuration using `--mo
 
 ```bash
 python hilp_zsrl/url_benchmark/test_multi_surface_offline_bothfrictionandGarvity0.py \
-  --seed 72 \
   --mode Ours \
   --config config_g1 \
   --lambda_wls_set 6.1
@@ -184,7 +192,6 @@ python hilp_zsrl/url_benchmark/test_multi_surface_offline_bothfrictionandGarvity
 
 ```bash
 python hilp_zsrl/url_benchmark/test_multi_surface_offline_bothfrictionandGarvity0.py \
-  --seed 169 \
   --mode Ours \
   --config config_g2 \
   --lambda_wls_set 6.1
@@ -196,7 +203,6 @@ python hilp_zsrl/url_benchmark/test_multi_surface_offline_bothfrictionandGarvity
 
 ```bash
 python hilp_zsrl/url_benchmark/test_multi_surface_offline_bothfrictionandGarvity0.py \
-  --seed 181 \
   --mode Ours \
   --config config_g3 \
   --lambda_wls_set 6.1
@@ -208,12 +214,10 @@ python hilp_zsrl/url_benchmark/test_multi_surface_offline_bothfrictionandGarvity
 
 ```bash
 python hilp_zsrl/url_benchmark/test_multi_surface_offline_bothfrictionandGarvity0.py \
-  --seed 91 \
   --mode Ours \
   --config config_g4 \
   --lambda_wls_set 6.1
 ```
-
 
 Ideally, you should get similar results on `Stand` Task: 
 
