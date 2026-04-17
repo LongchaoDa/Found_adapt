@@ -66,6 +66,23 @@ After downloading the dataset:
 2. Unzip the downloaded `.zip` file into `data`.
 3. Make sure the extracted directory hierarchy matches:
 
+E.g., On Linux, you can do:
+
+```bash
+cd /path/to/Found_adapt
+mkdir -p data
+unzip /path/to/your_downloaded_dataset.zip -d data
+```
+
+If `unzip` is not installed:
+
+```bash
+sudo apt-get update
+sudo apt-get install -y unzip
+```
+
+Then verify the extracted structure:
+
 ```bash
 Found_adapt/data/datacollection
 ```
