@@ -34,8 +34,8 @@ This codebase is tested with **Python 3.8.19**.
 We recommend creating a fresh Conda environment and then installing the Python packages with `pip`:
 
 ```bash
-conda create -n hilp_zsrl python=3.8.19 -y
-conda activate hilp_zsrl
+conda create -n fond_zsrl python=3.8.19 -y
+conda activate fond_zsrl
 python -m pip install --upgrade pip
 python -m pip install -r requirements.txt
 ```
@@ -44,7 +44,7 @@ If you prefer, you can also recreate the environment from `environment.yml`:
 
 ```bash
 conda env create -f environment.yml
-conda activate hilp_zsrl
+conda activate fond_zsrl
 ```
 
 ## Prerequisite Data
