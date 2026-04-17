@@ -165,6 +165,8 @@ All InDomain baseline results use **Direct** mode.
 | G4 | Direct-Transfer | 63.81 ± 14.14 | 5.28 ± 0.09 |
 | G4 | Found-adapt | 71.70 ± 11.81 | 6.12 ± 0.11 |
 
+
+<!-- 
 To reproduce the Direct-Transfer results reported in Table (Gravity settings G1–G4), we identify the closest matching seeds (among 0–199) to the reported Direct-Transfer mean performance.
 
 The selected seeds are:
@@ -210,7 +212,7 @@ python hilp_zsrl/url_benchmark/test_multi_surface_offline_bothfrictionandGarvity
   --mode Direct \
   --config config_g4
 ```
-
+ -->
 
 
 **Config definition.** :
