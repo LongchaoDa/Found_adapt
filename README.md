@@ -31,6 +31,11 @@ The provided scripts support controlled environment perturbations and evaluation
 
 This codebase is tested with **Python 3.8.19**.
 
+```bash
+git clone https://github.com/LongchaoDa/Found_adapt.git
+cd Found_adapt
+```
+
 We recommend creating a fresh Conda environment and then installing the Python packages with `pip`:
 
 ```bash
