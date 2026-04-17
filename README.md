@@ -60,6 +60,24 @@ The data required for this repository is available here:
 
 Please download this data before running the experiments below.
 
+After downloading the dataset:
+
+1. Create a folder named `data` under `Found_adapt`.
+2. Unzip the downloaded `.zip` file into `data`.
+3. Make sure the extracted directory hierarchy matches:
+
+```bash
+Found_adapt/data/datacollection
+```
+
+For example, after extraction you should have paths such as:
+
+```bash
+Found_adapt/data/datacollection/Sim2RealFoundationPolicy
+Found_adapt/data/datacollection/exorl_learn
+Found_adapt/data/datacollection/url_verify_solved
+```
+
 
 ## 0. The sim-to-real task configurations
 
