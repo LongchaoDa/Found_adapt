@@ -36,7 +36,7 @@ This codebase is tested with **Python 3.8.19**.
 
 This repository was tested on:
 
-* **GPU:** NVIDIA **GeForce RTX 4090** (PCI device ID `10de:2684`)
+* **GPU:** NVIDIA **GeForce RTX 4090** 
 * **CUDA toolkit:** **12.5** (`nvcc 12.5.40`)
 * **Python:** **3.8.19**
 
