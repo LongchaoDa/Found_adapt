@@ -31,6 +31,16 @@ The provided scripts support controlled environment perturbations and evaluation
 
 This codebase is tested with **Python 3.8.19**.
 
+## Tested Hardware / Compatibility
+
+This repository was tested on:
+
+* **GPU:** NVIDIA **GeForce RTX 4090** (PCI device ID `10de:2684`)
+* **CUDA toolkit:** **12.5** (`nvcc 12.5.40`)
+* **Python:** **3.8.19**
+
+At the moment, **RTX 5090 is not a supported/tested configuration for this repository**. We observed CUDA/driver compatibility issues on RTX 5090-class setups, so the experiments and commands in this repo should be assumed to be validated only on the RTX 4090 setup listed above unless a future update states otherwise.
+
 ```bash
 git clone https://github.com/LongchaoDa/Found_adapt.git
 cd Found_adapt
