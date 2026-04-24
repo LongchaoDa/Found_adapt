@@ -41,10 +41,13 @@ parser.add_argument("--repeat", type=int, default=1,
                     help="Repeat the whole run N times (default 1).")
 parser.add_argument("--lambda_wls_set", type=float, default=4.0,
                     help="The lambda_wls value to use in Ours mode (default 4.0).")
+parser.add_argument("--device", type=str, default="auto", choices=["auto", "cuda", "cpu"],
+                    help='Execution device for debug_offline.py. "auto" prefers CUDA when supported and otherwise falls back to CPU.')
 args = parser.parse_args()
 
 mode = args.mode # Direct, Ours, ...
 lambda_wls_set = args.lambda_wls_set
+device = args.device
 
 DEFAULT_SEEDS = {
     "config_g0": 88,
@@ -134,7 +137,7 @@ def run_test_offline(save_folder: Path, env_replay: str):
 
     command = [
         sys.executable, str(SCRIPT_DIR / "debug_offline.py"),
-        "run_group=EXP", "device=cuda",
+        "run_group=EXP", f"device={device}",
         "save_video=False", "use_wandb=False",
         "agent=sf", "agent.feature_learner=hilp",
         "p_randomgoal=0.375",

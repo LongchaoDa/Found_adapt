@@ -42,6 +42,39 @@ This repository was tested on:
 
 At the moment, **RTX 5090 is not a supported/tested configuration for this repository**. We observed CUDA/driver compatibility issues on RTX 5090-class setups, so the experiments and commands in this repo should be assumed to be validated only on the RTX 4090 setup listed above unless a future update states otherwise.
 
+### Fix Note for RTX 5090 / `sm_120`
+
+If you see an error like:
+
+```text
+NVIDIA GeForce RTX 5090 with CUDA capability sm_120 is not compatible with the current PyTorch installation
+CUDA error: no kernel image is available for execution on the device
+```
+
+the issue is usually **not** the project code itself. It means the installed PyTorch CUDA wheel does not include kernels for the RTX 50-series / Blackwell architecture.
+
+In practice, you should use:
+
+* **PyTorch 2.7.0 or newer**
+* a **CUDA 12.8+** PyTorch wheel
+
+For example, create a separate environment for RTX 5090 and install:
+
+```bash
+conda create -n fond_zsrl_rtx5090 python=3.10 -y
+conda activate fond_zsrl_rtx5090
+python -m pip install --upgrade pip
+python -m pip install torch==2.7.1 torchvision==0.22.1 torchaudio==2.7.1 \
+  --index-url https://download.pytorch.org/whl/cu128
+python -m pip install -r requirements.txt
+```
+
+Notes:
+
+* We recommend using a **separate environment** for RTX 5090 instead of modifying the original 4090-tested environment.
+* If `pip install -r requirements.txt` downgrades `torch`, reinstall the `cu128` PyTorch packages afterward.
+* If your cluster or workstation driver is too old, you may also need to update the NVIDIA driver so that CUDA 12.8+ wheels can run correctly.
+
 ```bash
 git clone https://github.com/LongchaoDa/Found_adapt.git
 cd Found_adapt
@@ -213,7 +246,7 @@ python hilp_zsrl/url_benchmark/test_multi_surface_offline_bothfrictionandGarvity
 ### ✅ Reproduce G3
 ```bash
 python hilp_zsrl/url_benchmark/test_multi_surface_offline_bothfrictionandGarvity0.py \
-  --mode Direct \
+  --mode Ours \
   --config config_g3
 ```
 

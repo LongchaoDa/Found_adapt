@@ -89,7 +89,7 @@ class Config:
     agent: tp.Any
     run_group: str = "EXP"
     seed: int = 0
-    device: str = "cuda"
+    device: str = "auto"
     save_video: bool = True
     use_tb: bool = False
     use_wandb: bool = True
@@ -531,11 +531,8 @@ class Workspace:
 
         self.cfg = cfg
         utils.set_seed_everywhere(cfg.seed)
-        if not torch.cuda.is_available():
-            if cfg.device != "cpu":
-                logger.warning(f"Falling back to cpu as {cfg.device} is not available")
-                cfg.device = "cpu"
-                cfg.agent.device = "cpu"
+        cfg.device = self._resolve_runtime_device(cfg.device)
+        cfg.agent.device = cfg.device
         self.device = torch.device(cfg.device)
 
         task = cfg.task
@@ -606,6 +603,40 @@ class Workspace:
         self.replay_loader._p_randomgoal = cfg.p_randomgoal
         self.replay_loader._frame_stack = cfg.frame_stack if cfg.obs_type == 'pixels' else None
         self.replay_loader._max_episodes = len(self.replay_loader._storage["discount"])
+
+    def _resolve_runtime_device(self, requested_device: str) -> str:
+        requested_device = str(requested_device).lower()
+        if requested_device == "cpu":
+            return "cpu"
+
+        if requested_device not in {"auto", "cuda"}:
+            raise ValueError(f"Unsupported device option: {requested_device}")
+
+        if not torch.cuda.is_available():
+            if requested_device == "cuda":
+                raise RuntimeError(
+                    "CUDA was requested but torch.cuda.is_available() is False. "
+                    "Check the NVIDIA driver, CUDA runtime, and the installed PyTorch wheel."
+                )
+            logger.warning("Falling back to cpu because CUDA is not available")
+            return "cpu"
+
+        capability = torch.cuda.get_device_capability(0)
+        device_name = torch.cuda.get_device_name(0)
+        sm_tag = f"sm_{capability[0]}{capability[1]}"
+        supported_arches = set(torch.cuda.get_arch_list())
+        if sm_tag not in supported_arches:
+            msg = (
+                f"Installed PyTorch binary does not support GPU {device_name} ({sm_tag}). "
+                f"Supported SM targets in this wheel: {sorted(supported_arches)}. "
+                "For RTX 50-series / Blackwell GPUs, use a PyTorch build with CUDA 12.8+."
+            )
+            if requested_device == "cuda":
+                raise RuntimeError(msg)
+            logger.warning("%s Falling back to cpu because device=auto.", msg)
+            return "cpu"
+
+        return "cuda"
 
     def _make_env(self) -> dmc.EnvWrapper:
         cfg = self.cfg
