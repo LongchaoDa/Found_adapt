@@ -1,5 +1,6 @@
 # Repository for Paper: *Latent Adaptation of Foundation Policies for Sim-to-Real Transfer*
 
+last update: April 23, 2026
 
 [![Python](https://img.shields.io/badge/Python-3.8.19-3776AB?style=flat-square&logo=python&logoColor=white)](https://www.python.org/downloads/)
 [![JAX](https://img.shields.io/badge/JAX-0.4.3-A50026?style=flat-square&logo=google&logoColor=white)](https://github.com/google/jax)
