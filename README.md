@@ -118,6 +118,11 @@ mkdir -p data
 unzip /path/to/your_downloaded_dataset.zip -d data
 ```
 
+```bash
+
+cp -r /home/local/ASURITE/longchao/Desktop/project/sim2realFoun/Sim2Real/Sim2RealFound_clean/data/datacollection_mini /home/local/ASURITE/longchao/Desktop/project/sim2realFoun/Sim2Real/Found_adapt/data
+```
+
 If `unzip` is not installed:
 
 ```bash
